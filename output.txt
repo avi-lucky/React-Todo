@@ -1,0 +1,17 @@
+yarn run v1.22.17
+$ react-scripts start
+Starting the development server...
+
+Failed to compile.
+
+./src/App.js
+  Line 24:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 33:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 34:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 35:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 36:  'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 43:  'React' must be in scope when using JSX  react/react-in-jsx-scope
+
+Search for the keywords to learn more about each error.
+Compiling...
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
