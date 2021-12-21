@@ -1,12 +1,30 @@
 import "./App.css";
-import React from 'react'
+import React, { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
-import { firebase, db } from "./firebase_config"
+import { firebase, db } from "./firebase_config";
+import { collection, doc, onSnapshot } from 'firebase/firestore/lite';
 
 function App() {
+  const [todos, setTodos] = useState([]);
   const [todoInput, setTodoInput] = useState("");
+
+  useEffect(() => {
+    getTodos();
+  }, []); // blank to run only on first launch
+
+  function getTodos() {
+    collection(db, "todos").onSnapshot(function(querySnapshot) {
+      setTodos(
+        querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          todo: doc.data().todo,
+          inprogress: doc.data().inprogress,
+        }))
+      );
+    });
+  }
 
   function addTodo(e) {
     e.preventDefault();
@@ -49,6 +67,10 @@ function App() {
             Default
           </Button>
         </form>
+
+        {todos.map((todo) => (
+          <p>{todo.todo}</p>
+        ))}
       </div>
     </div>
   );
