@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
-import { firebase, db } from "./firebase_config";
-import { collection, doc, onSnapshot } from 'firebase/firestore/lite';
+import { db } from "./firebase_config";
+import firebase from "firebase";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -15,7 +15,7 @@ function App() {
   }, []); // blank to run only on first launch
 
   function getTodos() {
-    collection(db, "todos").onSnapshot(function(querySnapshot) {
+    db.collection("todos").onSnapshot(function (querySnapshot) {
       setTodos(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,
