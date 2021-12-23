@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@material-ui/core";
 import { db } from "./firebase_config";
 import firebase from "firebase";
+import TodoListItem from "./Todo";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -15,7 +16,7 @@ function App() {
   }, []); // blank to run only on first launch
 
   function getTodos() {
-    db.collection("todos").onSnapshot(function (querySnapshot) {
+    db.collection("todos").onSnapshot(function(querySnapshot) {
       setTodos(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -69,7 +70,11 @@ function App() {
         </form>
 
         {todos.map((todo) => (
-          <p>{todo.todo}</p>
+          <TodoListItem
+            todo={todo.todo}
+            inprogress={todo.inProgress}
+            id={todo.id}
+          />
         ))}
       </div>
     </div>
